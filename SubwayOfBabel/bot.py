@@ -97,11 +97,9 @@ async def translate(text: str, target_lang: str) -> str:
             )
             response.raise_for_status()
             
-            # Отделение переведённого текста
             raw = response.json().get("response", "")
             translated = raw.split("<translation>")[-1].split("</translation>")[0].strip()
             
-            # Конечная очистка выходных данных
             translated = translated.split('Note:')[0].split('Warning:')[0].strip('"').strip()
             return translated if translated and translated != text else ""
             
@@ -129,7 +127,6 @@ async def handle_message(update: Update, context):
         if not msg:
             return
 
-        # Extract original text first
         original_text = msg.caption or msg.text or ""
         translations = {"🇷🇺": original_text.strip()}
         
