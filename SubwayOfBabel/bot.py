@@ -148,7 +148,6 @@ async def handle_message(update: Update, context):
                 if translated and validate_translation(original_text, translated):
                     translations[flag_map[lang]] = translated
 
-        # Media handling remains the same
         if msg.photo:
             photo = msg.photo[-1].file_id
             await context.bot.send_photo(
